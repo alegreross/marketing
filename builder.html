@@ -122,7 +122,7 @@
         React.createElement('section',{className:'lg:col-span-3 space-y-6'},
           React.createElement('div',{className:'bg-white rounded-2xl shadow-sm p-5 border border-slate-200'},
             React.createElement('div',{className:'flex items-start justify-between'},
-              React.createElement('div',null,React.createElement('h2',{className:'text-lg font-semibold'},'1) Configure'),React.createElement('p',{className:'text-sm text-slate-500'},'Pick a box tier, add items, and set your quantity.')),
+              React.createElement('div',null,React.createElement('h2',{className:'text-lg font-semibold'},'1) Select Kit'),React.createElement('p',{className:'text-sm text-slate-500'},'Pick a box tier, add items, and set your quantity.')),
               React.createElement('button',{onClick:reset,className:'text-sm px-3 py-1.5 rounded-lg border border-slate-300 hover:bg-slate-50'},'Reset')
             ),
             React.createElement('div',{className:'mt-4 grid md:grid-cols-3 gap-3'},
@@ -162,7 +162,7 @@
         React.createElement('section',{className:'lg:col-span-2 space-y-6'},
           React.createElement('div',{className:'bg-white rounded-2xl shadow-sm p-5 border border-slate-200'},
             React.createElement('h2',{className:'text-lg font-semibold'},'3) Box Preview'),
-            React.createElement('p',{className:'text-sm text-slate-500'},'Quick visualization — final mockups/art proofs to follow.'),
+            React.createElement('p',{className:'text-sm text-slate-500'},'Quick visualization.'),
             React.createElement('div',{className:'mt-4 aspect-square rounded-2xl bg-slate-100 p-4'},
               React.createElement('div',{className:'h-full w-full rounded-xl border-2 border-dashed border-slate-300 grid grid-cols-2 gap-3 p-3'},
                 Array.from({length:tier.slots}).map((_,idx)=>{
@@ -205,12 +205,9 @@
               React.createElement('button',{onClick:submit,disabled:sending,className:`px-4 py-2 rounded-xl text-white ${sending?'bg-slate-400':'bg-slate-900 hover:opacity-90'}`},sending?'Submitting…':'Submit Selections'),
               error && React.createElement('div',{className:'text-rose-600 text-sm'},error)
             ),
-            React.createElement('p',{className:'mt-3 text-xs text-slate-500'},'Submitting sends your selections to our server and emails a confirmation to you.')
           )
         )
       ),
-      React.createElement('footer',{className:'max-w-6xl mx-auto px-4 pb-10 text-xs text-slate-500'},'Need branded mockups / art proofs? I can generate realistic composites for the selected items.')
-    );
   }
   const root=ReactDOM.createRoot(document.getElementById('root'));
   root.render(React.createElement(App));

@@ -73,9 +73,6 @@
     async function submit(){
       setError('');
       if(!email){ setError('Please enter a contact email.'); return; }
-      if(ENDPOINT_URL.includes('PASTE_YOUR_APPS_SCRIPT')){
-        setError('Backend endpoint not configured yet. See README steps.'); return;
-      }
       setSending(true);
       const payload={
         admin: ADMIN_EMAIL,
@@ -89,14 +86,15 @@
       try{
         const res = await fetch(ENDPOINT_URL, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 'Content-Type': 'text/plain' },  // <= avoid CORS preflight
           body: JSON.stringify(payload),
         });
-        if(!res.ok){ throw new Error('Server responded '+res.status); }
+        const txt = await res.text();
+        if(!res.ok){ throw new Error('Server responded '+res.status+': '+txt); }
         window.location.href = 'thankyou.html';
       }catch(err){
         console.error(err);
-        setError('Submit failed. Please try again or contact us.');
+        setError('Submit failed. '+String(err));
       }finally{
         setSending(false);
       }
@@ -204,10 +202,11 @@
               React.createElement('label',{className:'block'},React.createElement('span',{className:'text-xs text-slate-500'},'Contact Email (required)'),React.createElement('input',{type:'email',placeholder:'you@company.com',value:email,onChange:e=>setEmail(e.target.value),className:'mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-slate-900'})),
               React.createElement('button',{onClick:submit,disabled:sending,className:`px-4 py-2 rounded-xl text-white ${sending?'bg-slate-400':'bg-slate-900 hover:opacity-90'}`},sending?'Submitting…':'Submit Selections'),
               error && React.createElement('div',{className:'text-rose-600 text-sm'},error)
-            ),
+            )
           )
         )
-      ),
+      )
+    );
   }
   const root=ReactDOM.createRoot(document.getElementById('root'));
   root.render(React.createElement(App));
